@@ -11,3 +11,5 @@ alias ll='ls -lh'
 alias bw='NODE_OPTIONS="--no-deprecation" bw'
 
 eval "$(starship init zsh)"
+
+export PATH="$HOME/bin/:$PATH"
