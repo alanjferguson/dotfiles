@@ -1,6 +1,8 @@
 [submodule "nvim/.config/nvim"]
-	path = nvim/.config/nvim
-	url = https://github.com/alanjferguson/lazyvim-config.git
+  path = nvim/.config/nvim
+  url = https://github.com/alanjferguson/lazyvim-config.git
+  branch = main
 [submodule "pfetch"]
-	path = pfetch
-	url = https://github.com/Un1q32/pfetch
+  path = pfetch
+  url = https://github.com/Un1q32/pfetch
+  branch = master
