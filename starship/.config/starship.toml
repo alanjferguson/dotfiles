@@ -1,10 +1,12 @@
 [username]
 show_always = true
 format = '[$user]($style)@'
+style_user = 'bold yellow'
 
 [hostname]
 ssh_only = false
 ssh_symbol = ''
+style = 'bold green'
 
 [directory]
 truncate_to_repo = false
