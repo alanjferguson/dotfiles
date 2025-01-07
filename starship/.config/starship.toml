@@ -10,10 +10,12 @@ style = 'bold green'
 
 [directory]
 truncate_to_repo = false
-truncation_length = 3
+truncation_length = 1
 fish_style_pwd_dir_length = 1
-style = 'bold cyan'
-repo_root_style = 'bold purple'
+# style = 'bold cyan'
+# Adding repo_root_style causes bug sometimes, look at wezterm repo
+# repo_root_style = 'bold purple'
+# before_repo_root_style = 'bold cyan'
 
 [battery]
 full_symbol = "• "
