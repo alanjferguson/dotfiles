@@ -13,3 +13,8 @@ alias bw='NODE_OPTIONS="--no-deprecation" bw'
 eval "$(starship init zsh)"
 
 export PATH="$HOME/bin/:$PATH"
+
+export EDITOR=nvim
+export VISUAL=zed
+
+PF_PACKAGE_MANAGERS='on' pfetch
