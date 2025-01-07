@@ -15,6 +15,6 @@ eval "$(starship init zsh)"
 export PATH="$HOME/bin/:$PATH"
 
 export EDITOR=nvim
-export VISUAL=zed
+export VISUAL=nvim
 
 PF_PACKAGE_MANAGERS='on' pfetch

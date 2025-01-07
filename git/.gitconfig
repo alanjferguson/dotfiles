@@ -1,24 +1,26 @@
-# This is Git's per-user configuration file.
+[user]
+  name = Alan J. Ferguson
+  email = alan@ferguson.info
+[init]
+  defaultBranch = main
 [color]
   status = auto
   branch = auto
   interactive = auto
   diff = auto
-	ui = true
+  ui = true
 [push]
-	recurseSubmodules = check
-[init]
-	defaultBranch = main
-[credential]
-	helper = store
+  recurseSubmodules = check
 [pull]
-	rebase = false
+  rebase = false
 [rerere]
   enabled = true
 [rebase]
   autosquash = true
   updateRefs = true
 [alias]
-	commit-reuse = ! git commit -eF $(git rev-parse --git-dir)/COMMIT_EDITMSG
-[include]
-	path=~/.gitconfig.local
+  commit-reuse = ! git commit -eF $(git rev-parse --git-dir)/COMMIT_EDITMSG
+[url "ssh://git@github.com/"]
+  insteadof = https://github.com/
+[url "ssh://git@gitlab.com/"]
+  insteadof = https://gitlab.com/
