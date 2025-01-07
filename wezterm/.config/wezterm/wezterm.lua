@@ -8,10 +8,10 @@ config.color_scheme = "Canonical Solarized Light"
 
 -- Font setup
 config.font = wezterm.font({
-	family = "ZedMono NF",
-	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+	family = "JuliaMono",
+	-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 })
-config.font_size = 13.0
+-- config.font_size = 13.0
 
 -- Hyperlinking
 config.hyperlink_rules = {
