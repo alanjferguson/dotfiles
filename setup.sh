@@ -8,6 +8,7 @@ git submodule update
 base=(
   zsh
   starship
+  nvim
 )
 
 # folders that should, or only need to be installed for a local user
