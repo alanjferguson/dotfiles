@@ -2,16 +2,15 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-local canonical_solarized = require('canonical-solarized')
-canonical_solarized.apply_to_config(config)
-config.color_scheme = "Canonical Solarized Light"
+-- local canonical_solarized = require('canonical-solarized')
+-- canonical_solarized.apply_to_config(config)
+-- config.color_scheme = "Canonical Solarized Light"
+config.color_scheme = 'GitHub-Dark-Default'
 
 -- Font setup
 config.font = wezterm.font({
 	family = "JuliaMono",
-	-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 })
--- config.font_size = 13.0
 
 -- Hyperlinking
 config.hyperlink_rules = {
