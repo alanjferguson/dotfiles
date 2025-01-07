@@ -2,7 +2,9 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-config.color_scheme = "Tokyo Night"
+local canonical_solarized = require('canonical-solarized')
+canonical_solarized.apply_to_config(config)
+config.color_scheme = "Canonical Solarized Light"
 
 -- Font setup
 config.font = wezterm.font({
