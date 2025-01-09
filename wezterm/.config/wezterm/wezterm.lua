@@ -2,10 +2,25 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
--- local canonical_solarized = require('canonical-solarized')
--- canonical_solarized.apply_to_config(config)
--- config.color_scheme = "Canonical Solarized Light"
-config.color_scheme = 'GitHub-Dark-Default'
+
+-- wezterm.gui is not available to the mux server, so take care to
+-- do something reasonable when this config is evaluated by the mux
+function get_appearance()
+  if wezterm.gui then
+    return wezterm.gui.get_appearance()
+  end
+  return 'Dark'
+end
+
+function scheme_for_appearance(appearance)
+  if appearance:find 'Dark' then
+    return 'GitHub-Dark-Default'
+  else
+    return 'GitHub-Light-Default'
+  end
+end
+
+config.color_scheme = scheme_for_appearance(get_appearance())
 
 -- Font setup
 config.font = wezterm.font({

@@ -6,7 +6,3 @@
   path = pfetch
   url = https://github.com/Un1q32/pfetch
   branch = master
-[submodule "wezterm/.config/wezterm/wezterm-canonical-solarized"]
-	path = wezterm/.config/wezterm/wezterm-canonical-solarized
-	url = https://github.com/gfguthrie/wezterm-canonical-solarized
-	branch = main

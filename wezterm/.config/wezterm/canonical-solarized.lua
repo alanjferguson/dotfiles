@@ -1,1 +1,0 @@
-wezterm-canonical-solarized/canonical_solarized.lua
