@@ -22,6 +22,8 @@ end
 
 config.color_scheme = scheme_for_appearance(get_appearance())
 
+config.force_reverse_video_cursor = true
+
 -- Font setup
 config.font = wezterm.font({
 	family = "JuliaMono",
