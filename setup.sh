@@ -11,12 +11,14 @@ base=(
   starship
   nvim
   bin
+  fish
 )
 
 # folders that should, or only need to be installed for a local user
 useronly=(
   git
   wezterm
+  ssh
 )
 
 # run the stow command for the passed in directory ($2) in location $1
