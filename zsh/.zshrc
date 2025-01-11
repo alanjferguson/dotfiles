@@ -11,8 +11,6 @@ alias ll='ls -lh'
 # https://github.com/bitwarden/clients/issues/6689
 alias bw='NODE_OPTIONS="--no-deprecation" bw'
 
-eval "$(starship init zsh)"
-
 export PATH="$HOME/bin/:$PATH"
 
 export EDITOR=nvim
