@@ -26,23 +26,24 @@ stowit() {
   usr=$1
   app=$2
   # -v verbose
+  # --dotfiles convert dot-foo to .foo
   # -R recursive
   # -t target
-  stow -v -R -t ${usr} ${app}
+  stow -v --dotfiles -R -t "${usr}" "${app}"
 }
 
 echo ""
-echo "Stowing apps for user: ${whoami}"
+echo "Stowing apps for user: $(whoami)"
 
 # install apps available to local users and root
-for app in ${base[@]}; do
-  stowit "${HOME}" $app
+for app in "${base[@]}"; do
+  stowit "${HOME}" "$app"
 done
 
 # install only user space folders
-for app in ${useronly[@]}; do
+for app in "${useronly[@]}"; do
   if [[ ! "$(whoami)" = *"root"* ]]; then
-    stowit "${HOME}" $app
+    stowit "${HOME}" "$app"
   fi
 done
 
