@@ -13,8 +13,6 @@
   recurseSubmodules = check
 [pull]
   rebase = false
-[rerere]
-  enabled = true
 [rebase]
   autosquash = true
   updateRefs = true
