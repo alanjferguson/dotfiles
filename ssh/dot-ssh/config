@@ -1,3 +1,5 @@
+# .ssh/config
+
 Include config.d/*.conf
 
 Host *
