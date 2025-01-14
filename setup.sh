@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# make sure we have pulled in and updated any submodules
-git submodule init
-git submodule update
-
 # what directories should be installable by all users including the root user
 base=(
   bash
@@ -26,14 +22,17 @@ stowit() {
   usr=$1
   app=$2
   # -v verbose
+  # --adopt so we can pull in existing changes
   # --dotfiles convert dot-foo to .foo
   # -R recursive
   # -t target
-  stow -v --dotfiles -R -t "${usr}" "${app}"
+  echo "#### Stowing ${app}"
+  stow -v --adopt --dotfiles -R -t "${usr}" "${app}"
+  echo ""
 }
 
 echo ""
-echo "Stowing apps for user: $(whoami)"
+echo "#### Stowing apps for user: $(whoami)"
 
 # install apps available to local users and root
 for app in "${base[@]}"; do
@@ -47,5 +46,4 @@ for app in "${useronly[@]}"; do
   fi
 done
 
-echo ""
 echo "##### ALL DONE"
