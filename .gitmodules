@@ -1,4 +1,0 @@
-[submodule "pfetch"]
-  path = pfetch
-  url = https://github.com/Un1q32/pfetch
-  branch = master
