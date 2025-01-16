@@ -19,6 +19,6 @@
 [alias]
   commit-reuse = ! git commit -eF $(git rev-parse --git-dir)/COMMIT_EDITMSG
 [url "ssh://git@github.com/"]
-  insteadof = https://github.com/
+  pushInsteadof = https://github.com/
 [url "ssh://git@gitlab.com/"]
-  insteadof = https://gitlab.com/
+  pushInsteadof = https://gitlab.com/
