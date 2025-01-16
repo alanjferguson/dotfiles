@@ -14,12 +14,13 @@ end
 
 function scheme_for_appearance(appearance)
   if appearance:find 'Dark' then
-    return 'One Dark (Gogh)'
+    return 'Monokai Pro'
   else
-    return 'One Light (Gogh)'
+    return 'Monokai Pro Light'
   end
 end
 
+config.color_scheme_dirs = { '~/.config/wezterm/colors' }
 config.color_scheme = scheme_for_appearance(get_appearance())
 
 config.force_reverse_video_cursor = true
