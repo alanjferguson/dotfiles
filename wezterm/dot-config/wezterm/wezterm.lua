@@ -26,8 +26,9 @@ config.force_reverse_video_cursor = true
 
 -- Font setup
 config.font = wezterm.font({
-	family = "JuliaMono",
+	family = "JuliaMono Nerd Font",
 })
+config.harfbuzz_features = { 'zero' }
 
 -- Hyperlinking
 config.hyperlink_rules = {
