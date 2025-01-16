@@ -17,6 +17,10 @@ fish_style_pwd_dir_length = 1
 # repo_root_style = 'bold purple'
 # before_repo_root_style = 'bold cyan'
 
+[character]
+success_symbol="[✓](green bold)"
+error_symbol="[✗](red bold)"
+
 [battery]
 full_symbol = "• "
 charging_symbol = "⇡ "
