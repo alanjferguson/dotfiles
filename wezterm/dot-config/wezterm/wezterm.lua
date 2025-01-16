@@ -14,9 +14,9 @@ end
 
 function scheme_for_appearance(appearance)
   if appearance:find 'Dark' then
-    return 'GitHub-Dark-Default'
+    return 'One Dark (Gogh)'
   else
-    return 'GitHub-Light-Default'
+    return 'One Light (Gogh)'
   end
 end
 
