@@ -14,18 +14,19 @@ end
 
 function scheme_for_appearance(appearance)
   if appearance:find 'Dark' then
-    return 'Monokai Pro'
+    return 'tokyonight_night'
   else
-    return 'Monokai Pro Light'
+    return 'tokyonight_day'
   end
 end
 
-config.color_scheme_dirs = { '~/.config/wezterm/colors' }
+-- config.color_scheme_dirs = { '~/.config/wezterm/colors' }
 config.color_scheme = scheme_for_appearance(get_appearance())
 
 config.force_reverse_video_cursor = true
 
 -- Font setup
+config.font_size = 14.0
 config.font = wezterm.font({
 	family = "JuliaMono Nerd Font",
 })
