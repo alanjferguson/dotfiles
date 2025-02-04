@@ -1,4 +1,5 @@
 if test -d "$HOME/.cargo/bin"
+  and test -x "$HOME/.cargo/env.fish"
   source "$HOME/.cargo/env.fish"
 end
 
