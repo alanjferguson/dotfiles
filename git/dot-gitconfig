@@ -4,6 +4,10 @@
   signingkey = ~/.ssh/id_ajf_git_signing.pub
 [gpg]
   format = ssh
+[commit]
+  gpgSign = true
+[tag]
+  gpgSign = true
 [init]
   defaultBranch = main
 [color]
