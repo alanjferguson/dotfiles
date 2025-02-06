@@ -14,5 +14,3 @@ Host *
 
   # Security settings
   HashKnownHosts yes
-  AddKeysToAgent yes
-  IdentitiesOnly yes
