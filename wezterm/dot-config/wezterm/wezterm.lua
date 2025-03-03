@@ -31,6 +31,10 @@ config.font = wezterm.font({
 })
 config.harfbuzz_features = { 'zero' }
 
+
+-- Use retro text tab bar instead
+config.use_fancy_tab_bar = false
+
 -- Hyperlinking
 config.hyperlink_rules = {
 	-- Linkify things that look like URLs and the host has a TLD name.
