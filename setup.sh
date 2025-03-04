@@ -20,10 +20,8 @@ print_banner() {
 base=(
   bash
   zsh
-  starship
   nvim
   bin
-  fish
 )
 
 # Folders that should, or only need to be installed for a local user
