@@ -1,0 +1,2 @@
+zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
+zstyle ':plugin:ez-compinit' 'compstyle' 'prez'
