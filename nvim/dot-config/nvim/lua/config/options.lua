@@ -12,3 +12,7 @@ vim.opt.listchars = {
 
 -- Disable Autoformat everywhere
 vim.g.autoformat = false
+
+-- Turn on auto wrapping
+vim.opt.wrap = true
+vim.opt.breakindent = true
