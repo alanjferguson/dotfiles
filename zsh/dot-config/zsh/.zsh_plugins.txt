@@ -21,3 +21,5 @@ ohmyzsh/ohmyzsh path:plugins/ssh
 zsh-users/zsh-syntax-highlighting           # Syntax highlighting
 zsh-users/zsh-autosuggestions               # Auto-suggestions
 
+# Nicer window title naming
+olets/zsh-window-title
