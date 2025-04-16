@@ -8,7 +8,9 @@ My personal dotfiles repository, managed with GNU Stow. This repository contains
 - Git
 - Bash (for running the setup script)
 
-## Installation
+## Installation and Management
+
+The `bootstrap` script handles both initial setup and ongoing management of your dotfiles:
 
 1. Clone this repository:
    ```bash
@@ -16,15 +18,20 @@ My personal dotfiles repository, managed with GNU Stow. This repository contains
    cd ~/.dotfiles
    ```
 
-2. Run the setup script:
+2. Initial setup and ongoing management:
    ```bash
-   ./setup.sh
+   # Create symlinks for all configurations
+   ./bootstrap
+   
+   # Remove all symlinks (useful for reverting changes)
+   ./bootstrap unstow
    ```
 
-The setup script will:
+The script uses GNU Stow to:
 - Create symlinks for all configuration files
 - Handle both base and user-specific configurations
 - Preserve existing configurations by adopting them into the repository
+- Remove symlinks when needed
 
 ## Configuration Components
 
@@ -44,9 +51,9 @@ The setup script will:
 ```
 .
 ├── bin/           # Custom scripts and utilities
+├── bootstrap      # Configuration management script
 ├── git/           # Git configuration
 ├── nvim/          # Neovim configuration
-├── setup.sh       # Installation script
 ├── ssh/           # SSH configuration
 ├── wezterm/       # WezTerm configuration
 ├── zed/           # Zed editor configuration
@@ -64,7 +71,7 @@ The setup script will:
 
 To customize any configuration:
 1. Edit the relevant files in their respective directories
-2. Run `./setup.sh` again to apply changes
+2. Run `./bootstrap` again to apply changes
 
 ## Contributing
 

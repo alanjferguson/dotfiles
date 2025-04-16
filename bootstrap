@@ -46,20 +46,73 @@ stowit() {
   echo ""
 }
 
-print_banner "Stowing apps for user: $(whoami)"
-print_banner "Stowing base apps"
+# Run the unstow command for the passed in directory ($2) in location $1
+unstowit() {
+  usr=$1
+  app=$2
+  echo -e "${BOLD}${YELLOW}Unstowing ${app}${NC}"
+  # -v verbose
+  # --dotfiles convert dot-foo to .foo
+  # -D delete
+  # -t target
+  stow -v --dotfiles -D -t "${usr}" "${app}"
+  echo ""
+}
 
-# Install apps available to local users and root
-for app in "${base[@]}"; do
-  stowit "${HOME}" "$app"
-done
-
-# Install only user space folders (only if not root)
-if [[ "$(whoami)" != "root" ]]; then
-  print_banner "Stowing user only apps"
-  for app in "${useronly[@]}"; do
-    stowit "${HOME}" "$app"
+# Process all apps in the given array with the given function
+process_apps() {
+  local func=$1
+  shift
+  local apps=("$@")
+  
+  for app in "${apps[@]}"; do
+    $func "${HOME}" "$app"
   done
+}
+
+# Show usage information
+show_usage() {
+  echo "Usage: $0 [stow|unstow]"
+  echo "  stow   - Create symlinks for all configurations (default)"
+  echo "  unstow - Remove symlinks for all configurations"
+  exit 1
+}
+
+# Main script logic
+if [[ $# -gt 1 ]]; then
+  show_usage
 fi
 
-print_banner "Stowing complete"
+action=${1:-stow}
+
+case $action in
+  stow)
+    print_banner "Stowing apps for user: $(whoami)"
+    print_banner "Stowing base apps"
+    process_apps stowit "${base[@]}"
+    
+    if [[ "$(whoami)" != "root" ]]; then
+      print_banner "Stowing user only apps"
+      process_apps stowit "${useronly[@]}"
+    fi
+    
+    print_banner "Stowing complete"
+    ;;
+    
+  unstow)
+    print_banner "Unstowing apps for user: $(whoami)"
+    print_banner "Unstowing base apps"
+    process_apps unstowit "${base[@]}"
+    
+    if [[ "$(whoami)" != "root" ]]; then
+      print_banner "Unstowing user only apps"
+      process_apps unstowit "${useronly[@]}"
+    fi
+    
+    print_banner "Unstowing complete"
+    ;;
+    
+  *)
+    show_usage
+    ;;
+esac
