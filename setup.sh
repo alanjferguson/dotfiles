@@ -18,7 +18,6 @@ print_banner() {
 
 # What directories should be installable by all users including the root user
 base=(
-  bash
   zsh
   starship
   nvim
