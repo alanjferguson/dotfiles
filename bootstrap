@@ -27,7 +27,13 @@ get_script_dir() {
     local source="${BASH_SOURCE[0]}"
     while [ -h "$source" ]; do
         local dir="$(cd -P "$(dirname "$source")" && pwd)"
-        source="$(readlink "$source")"
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            # macOS
+            source="$(readlink "$source")"
+        else
+            # Linux
+            source="$(readlink -f "$source")"
+        fi
         [[ $source != /* ]] && source="$dir/$source"
     done
     dir="$(cd -P "$(dirname "$source")" && pwd)"
@@ -37,7 +43,15 @@ get_script_dir() {
 # Check if the repository is owned by the current user
 check_repo_ownership() {
     local script_dir="$(get_script_dir)"
-    local repo_owner="$(stat -f '%Su' "$script_dir")"
+    local repo_owner
+    
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        repo_owner="$(stat -f '%Su' "$script_dir")"
+    else
+        # Linux
+        repo_owner="$(stat -c '%U' "$script_dir")"
+    fi
     
     if [ "$repo_owner" != "$(whoami)" ]; then
         print_warning "This dotfiles repository (at $script_dir) is owned by '$repo_owner'"
