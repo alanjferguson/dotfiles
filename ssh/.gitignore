@@ -1,0 +1,51 @@
+# Private SSH keys and certificates
+# These should never be committed as they grant access to systems
+id_rsa
+id_ecdsa
+id_ed25519
+id_dsa
+*.pem
+*.key
+*_rsa
+*_ecdsa
+*_ed25519
+*_dsa
+
+# Public keys and certificates
+# These can reveal usernames and systems, so they're typically ignored
+*.pub
+*.cert
+*.crt
+*.cer
+*.der
+
+# Environment and credential files
+# These often contain sensitive information like passwords and tokens
+*.env
+.env*
+secrets
+credentials
+
+# SSH known hosts and configuration
+# Known hosts files contain information about previously connected servers
+known_hosts
+known_hosts.old
+# Local configuration overrides and machine-specific configs
+config.local
+config.d/
+
+# SSH agent files
+# These are temporary files used by SSH agent
+*agent*
+*Agent*
+
+# Log files and directories
+# These can contain sensitive connection information
+*.log
+logs/
+
+# Backup files
+# System and user-created backup files
+*.bak
+*.backup
+*_backup 
