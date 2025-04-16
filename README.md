@@ -6,7 +6,7 @@ My personal dotfiles repository, managed with GNU Stow. This repository contains
 
 - GNU Stow (install via package manager)
 - Git
-- Bash or Zsh
+- Bash (for running the setup script)
 
 ## Installation
 
@@ -29,7 +29,6 @@ The setup script will:
 ## Configuration Components
 
 ### Base Configurations (Available to all users)
-- `bash/` - Bash shell configuration
 - `zsh/` - Zsh shell configuration
 - `nvim/` - Neovim configuration
 - `bin/` - Custom scripts and utilities
@@ -44,7 +43,6 @@ The setup script will:
 
 ```
 .
-├── bash/          # Bash configuration
 ├── bin/           # Custom scripts and utilities
 ├── git/           # Git configuration
 ├── nvim/          # Neovim configuration
