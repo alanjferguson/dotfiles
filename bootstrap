@@ -22,6 +22,35 @@ print_warning() {
     echo -e "\n${RED}${BOLD}WARNING:${NC} $1\n"
 }
 
+# Check if Stow version supports --dotfiles flag
+check_stow_version() {
+    local required_version="2.3.0"
+    local stow_version
+    
+    stow_version=$(stow --version 2>/dev/null | head -n1 | sed -E 's/.*([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+    
+    if [ -z "$stow_version" ]; then
+        print_warning "Could not determine Stow version. Please ensure you have Stow $required_version or later installed."
+        exit 1
+    fi
+    
+    # Compare versions using a portable bash-only method using arrays
+    local IFS=.
+    local i required=($required_version) current=($stow_version) # split into array
+    
+    for ((i=0; i<3; i++)); do
+        if [[ -z "${current[i]}" ]]; then
+            current[i]=0
+        fi
+        if ((10#${current[i]} < 10#${required[i]})); then
+            print_warning "Your Stow version ($stow_version) is too old. Please upgrade to version $required_version or later."
+            exit 1
+        elif ((10#${current[i]} > 10#${required[i]})); then
+            break
+        fi
+    done
+}
+
 # Get the real path of the script, resolving any symlinks
 get_script_dir() {
     local source="${BASH_SOURCE[0]}"
@@ -110,6 +139,9 @@ show_usage() {
 if [[ $# -gt 1 ]]; then
   show_usage
 fi
+
+# Check Stow version before proceeding
+check_stow_version
 
 # Check repository ownership before proceeding
 check_repo_ownership
