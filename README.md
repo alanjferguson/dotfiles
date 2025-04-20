@@ -7,6 +7,7 @@ My personal dotfiles repository, managed with GNU Stow. This repository contains
 - GNU Stow (install via package manager)
 - Git
 - Bash (for running the setup script)
+- macOS or Linux system
 
 ## Installation and Management
 
@@ -27,51 +28,37 @@ The `bootstrap` script handles both initial setup and ongoing management of your
    ./bootstrap unstow
    ```
 
-The script uses GNU Stow to:
-- Create symlinks for all configuration files
-- Handle both base and user-specific configurations
-- Preserve existing configurations by adopting them into the repository
-- Remove symlinks when needed
+The `./bootstrap` script uses GNU Stow to create and manage symlinks in your home directory. Each subdirectory in this repository is stowed relative to your home directory, and files with a `dot-` prefix (e.g., `dot-zshrc`) are automatically converted to their proper hidden file names (e.g., `.zshrc`).
 
-## Configuration Components
+## Repository Structure
 
-### Base Configurations (Available to all users)
-- `zsh/` - Zsh shell configuration
-- `nvim/` - Neovim configuration
-- `bin/` - Custom scripts and utilities
-
-### User-Specific Configurations
-- `git/` - Git configuration and aliases
-- `wezterm/` - WezTerm terminal configuration
-- `ssh/` - SSH configuration
-- `zed/` - Zed editor configuration
-
-## Structure
+The repository is organised into separate directories for each tool's configuration:
 
 ```
 .
-├── bin/           # Custom scripts and utilities
-├── bootstrap      # Configuration management script
-├── git/           # Git configuration
-├── nvim/          # Neovim configuration
-├── ssh/           # SSH configuration
-├── wezterm/       # WezTerm configuration
+├── bin/           # custom scripts and utilities
+├── git/           # git configuration and aliases
+├── nvim/          # neovim configuration
+├── ssh/           # ssh configuration
+├── wezterm/       # WezTerm terminal configuration
 ├── zed/           # Zed editor configuration
-└── zsh/           # Zsh configuration
+├── zsh/           # zsh shell configuration
+└── bootstrap      # configuration management script
 ```
 
-## Features
+## Customisation
 
-- **Modular Organization**: Each tool's configuration is isolated in its own directory
-- **Easy Installation**: Single script setup with GNU Stow
-- **Version Controlled**: All configurations are tracked in Git
-- **Cross-Platform**: Works on macOS and Linux systems
+To customise your configurations:
 
-## Customization
-
-To customize any configuration:
 1. Edit the relevant files in their respective directories
-2. Run `./bootstrap` again to apply changes
+2. Run `./bootstrap stow` to apply changes if you have:
+   - Added new files or directories
+   - Renamed files or directories
+   - Changed the structure of a configuration directory
+   
+   You don't need to run `./bootstrap stow` if you've only:
+   - Modified existing file contents
+   - Used directory folding (e.g., `~/.config/nvim` → `nvim/.config/nvim`)
 
 ## Contributing
 
