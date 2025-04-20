@@ -21,7 +21,7 @@ The `bootstrap` script handles both initial setup and ongoing management of your
 2. Initial setup and ongoing management:
    ```bash
    # Create symlinks for all configurations
-   ./bootstrap
+   ./bootstrap stow
    
    # Remove all symlinks (useful for reverting changes)
    ./bootstrap unstow
