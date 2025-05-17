@@ -5,6 +5,8 @@ This directory contains Git configuration files that will be symlinked to the ap
 ## Configuration Structure
 
 - `dot-config/git/config`: Main Git configuration (symlinked to `~/.config/git/config`)
+- `dot-config/git/ignore`: Global gitignore patterns (symlinked to `~/.config/git/ignore`)
+- `dot-gitconfig`: (Optional) Machine/user-specific Git configuration (symlinked to `~/.gitconfig`)
 
 ## How Git Configuration Loading Works
 
@@ -36,6 +38,13 @@ Examples of machine-specific settings:
 - Different email address for work vs. personal
 - Work-specific proxy settings
 - Different SSH key paths
+
+### Global Ignores
+
+`dot-config/git/ignore` contains patterns for files that should be ignored in all Git repositories:
+- Claude-specific files (CLAUDE.md)
+- Operating system files (.DS_Store, Thumbs.db)
+- Editor files (.vscode/, *.swp)
 
 ## Installation
 
