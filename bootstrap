@@ -97,9 +97,8 @@ stowit() {
   # -v verbose
   # --adopt so we can pull in existing changes
   # --dotfiles convert dot-foo to .foo
-  # -R recursive
   # -t target
-  stow -v --adopt --dotfiles -R -t "${usr}" "${app}"
+  stow -v --adopt --dotfiles -t "${usr}" "${app}"
   echo ""
 }
 
@@ -130,9 +129,9 @@ process_apps() {
 # Show usage information
 show_usage() {
   echo "Usage: $0 [stow|unstow]"
-  echo "  stow   - Create symlinks for all configurations (default)"
+  echo "  help   - Show this help message (default)"
+  echo "  stow   - Create symlinks for all configurations"
   echo "  unstow - Remove symlinks for all configurations"
-  echo "  help   - Show this help message"
   exit 1
 }
 
