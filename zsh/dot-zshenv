@@ -21,5 +21,6 @@ path=(
   /opt/{homebrew,local}/{,s}bin(N)
   $HOME/.cargo/bin(N)
   /usr/local/{,s}bin(N)
+  $HOME/.config/emacs/bin(N)
   $path
 )
