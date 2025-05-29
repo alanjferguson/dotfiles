@@ -3,7 +3,7 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
+;; Fix for MacOS not switching focus to Emacs.app automatically on open
 (select-frame-set-input-focus (selected-frame))
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
@@ -25,6 +25,11 @@
 ;;
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+
+(setq doom-font (font-spec :family "IosevkaTerm NF" :size 13)
+      doom-variable-pitch-font (font-spec :family "IosevkaTerm NFP" :size 13)
+      doom-big-font (font-spec :family "IosevkaTerm NF" :size 16)
+      doom-serif-font (font-spec :family "IosevkaTermSlab NFM"))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -34,7 +39,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-solarized-light)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
