@@ -1,2 +1,4 @@
-(( $+commands[brew] )) || return 1
-eval $(brew shellenv)
+if (($+commands[brew])); then
+    eval $(brew shellenv)
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+fi
