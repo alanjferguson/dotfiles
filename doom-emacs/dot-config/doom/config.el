@@ -43,7 +43,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -81,3 +81,26 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
+(defun my-jupyter-api-http-request--ignore-login-error-a
+    (func url endpoint method &rest data)
+  (cond
+   ((member endpoint '("login"))
+    (ignore-error (jupyter-api-http-error)
+      (apply func url endpoint method data)))
+   (:else
+    (apply func url endpoint method data))))
+(advice-add
+ #'jupyter-api-http-request
+ :around #'my-jupyter-api-http-request--ignore-login-error-a)
+
+;; fix for tramp vterm not working?
+(after! vterm
+  (setq vterm-tramp-shells '((t login-shell)
+                             ("ssh" login-shell "/bin/zsh"))))
+
+;; fix to make sure we always use bitwarden ssh agent if its available
+(setenv "SSH_AUTH_SOCK" "$HOME/.bitwarden-ssh-agent.sock")
+(if (file-exists-p (expand-file-name "~/.bitwarden-ssh-agent.sock"))
+    (setenv "SSH_AUTH_SOCK" (expand-file-name "~/.bitwarden-ssh-agent.sock")))
