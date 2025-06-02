@@ -101,6 +101,14 @@
                              ("ssh" login-shell "/bin/zsh"))))
 
 ;; fix to make sure we always use bitwarden ssh agent if its available
-(setenv "SSH_AUTH_SOCK" "$HOME/.bitwarden-ssh-agent.sock")
 (if (file-exists-p (expand-file-name "~/.bitwarden-ssh-agent.sock"))
     (setenv "SSH_AUTH_SOCK" (expand-file-name "~/.bitwarden-ssh-agent.sock")))
+
+(after! tramp
+  (tramp-set-completion-function
+ "ssh" (append (tramp-get-completion-function "ssh")
+               (mapcar (lambda (file) `(tramp-parse-sconfig ,file))
+                       (directory-files
+                        "~/.ssh/config.d/"
+                        'full directory-files-no-dot-files-regexp))))
+  )
