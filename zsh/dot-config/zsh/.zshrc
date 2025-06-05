@@ -4,6 +4,11 @@
 #
 #
 
+[[ "$TERM" = "dumb" ]] && unsetopt zle && PS1='$ ' && return
+
+# HACK: to get round the unterminated line character printing a % in emacs vterm
+unsetopt PROMPT_SP
+
 # Lazy-load (autoload) Zsh function files from a directory.
 ZFUNCDIR=${ZDOTDIR:-$HOME}/.zfunctions
 fpath=($ZFUNCDIR $fpath)
@@ -30,12 +35,13 @@ for _rc in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh; do
 done
 unset _rc
 
-if [[ "$TERM" != "dumb" ]]; then
-  if (($+commands[starship])); then
-    setopt LOCAL_OPTIONS NO_WARN_CREATE_GLOBAL
-    eval "$(starship init zsh)"
-  fi
+if (($+commands[starship])); then
+  setopt LOCAL_OPTIONS NO_WARN_CREATE_GLOBAL
+  eval "$(starship init zsh)"
 fi
+
+# HACK: to get round the unterminated line character printing a % in emacs vterm
+setopt PROMPT_SP
 
 # Display pfetch at start
 greeting
