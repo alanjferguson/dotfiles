@@ -15,22 +15,19 @@ end
 
 local function scheme_for_appearance(appearance)
   if appearance:find('Dark') then
-    return 'tokyonight_night'
+    return 'Catppuccin Mocha'
   else
-    return 'tokyonight_day'
+    return 'Catppuccin Latte'
   end
 end
 
 -- Set the color scheme based on system appearance
 config.color_scheme = scheme_for_appearance(get_appearance())
 
--- Make the cursor easier to see by using reverse video style
-config.force_reverse_video_cursor = true
-
 -- Font setup
 config.font_size = 14.0
 config.font = wezterm.font({
-  family = "JuliaMono Nerd Font",
+  family = "Iosevka Nerd Font",
 })
 -- Use slashed zero for better readability
 config.harfbuzz_features = { 'zero' }
