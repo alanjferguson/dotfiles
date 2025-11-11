@@ -14,16 +14,18 @@ My personal dotfiles repository, managed with GNU Stow. This repository contains
 The `bootstrap` script handles both initial setup and ongoing management of your dotfiles:
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/alanjferguson/dotfiles.git ~/.dotfiles
    cd ~/.dotfiles
    ```
 
 2. Initial setup and ongoing management:
+
    ```bash
    # Create symlinks for all configurations
    ./bootstrap stow
-   
+
    # Remove all symlinks (useful for reverting changes)
    ./bootstrap unstow
    ```
@@ -34,7 +36,7 @@ The `./bootstrap` script uses GNU Stow to create and manage symlinks in your hom
 
 The repository is organised into separate directories for each tool's configuration:
 
-```
+```text
 .
 ├── bin/           # custom scripts and utilities
 ├── git/           # git configuration and aliases
@@ -55,7 +57,7 @@ To customise your configurations:
    - Added new files or directories
    - Renamed files or directories
    - Changed the structure of a configuration directory
-   
+
    You don't need to run `./bootstrap stow` if you've only:
    - Modified existing file contents
    - Used directory folding (e.g., `~/.config/nvim` → `nvim/.config/nvim`)
@@ -66,4 +68,4 @@ Feel free to fork this repository and adapt it to your needs. If you find any is
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
