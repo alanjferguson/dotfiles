@@ -1,0 +1,99 @@
+{
+    "packages": [
+        {
+            "current_version": "0.0",
+            "install_timestamp": 1762440754,
+            "package": {
+                "author": {
+                    "contact": {},
+                    "name": ""
+                },
+                "description": "",
+                "description_full": "",
+                "identifier": "com.github.dawidcislo.alternate-kicad-library",
+                "license": "",
+                "name": "com_github_dawidcislo_alternate-kicad-library",
+                "resources": {},
+                "type": "invalid",
+                "versions": [
+                    {
+                        "kicad_version": "9.0",
+                        "status": "stable",
+                        "version": "0.0"
+                    }
+                ]
+            },
+            "pinned": false,
+            "repository_id": "",
+            "repository_name": "<unknown>"
+        },
+        {
+            "current_version": "1.2",
+            "install_timestamp": 1762706344,
+            "package": {
+                "author": {
+                    "contact": {
+                        "web": "https://github.com/pointhi/kicad-color-schemes/"
+                    },
+                    "name": "Thomas Pointhuber"
+                },
+                "description": "Based on Solarized colorscheme from Ethan Schoonover",
+                "description_full": "Based on Solarized colorscheme from Ethan Schoonover.\nSee https://ethanschoonover.com/solarized/ for more details.",
+                "identifier": "com.github.pointhi.kicad-color-schemes.solarized-light",
+                "license": "CC0-1.0",
+                "maintainer": {
+                    "contact": {
+                        "web": "https://github.com/pointhi/kicad-color-schemes/"
+                    },
+                    "name": "Thomas Pointhuber"
+                },
+                "name": "Solarized Light Theme",
+                "resources": {
+                    "Github": "https://github.com/pointhi/kicad-color-schemes"
+                },
+                "type": "colortheme",
+                "versions": [
+                    {
+                        "download_sha256": "0be21e4d43066a1870a88eba7b627a4dac1c2fec20506dd50c78755200b412a3",
+                        "download_size": 4390,
+                        "download_url": "https://github.com/pointhi/kicad-color-schemes/releases/download/2021-12-05/com.github.pointhi.kicad-color-schemes.solarized-light_v1.2_pcm.zip",
+                        "install_size": 5679,
+                        "kicad_version": "5.99",
+                        "status": "stable",
+                        "version": "1.2"
+                    }
+                ]
+            },
+            "pinned": false,
+            "repository_id": "46f88614eade3439",
+            "repository_name": "KiCad official repository"
+        },
+        {
+            "current_version": "0.0",
+            "install_timestamp": 1762423504,
+            "package": {
+                "author": {
+                    "contact": {},
+                    "name": ""
+                },
+                "description": "",
+                "description_full": "",
+                "identifier": "com.gitlab.franzee.kicad-addons.generic",
+                "license": "",
+                "name": "com_gitlab_franzee_kicad-addons_generic",
+                "resources": {},
+                "type": "invalid",
+                "versions": [
+                    {
+                        "kicad_version": "9.0",
+                        "status": "stable",
+                        "version": "0.0"
+                    }
+                ]
+            },
+            "pinned": false,
+            "repository_id": "",
+            "repository_name": "<unknown>"
+        }
+    ]
+}
