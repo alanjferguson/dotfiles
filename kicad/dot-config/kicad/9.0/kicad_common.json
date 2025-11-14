@@ -34,7 +34,7 @@
   "git": {
     "authorEmail": "alan@ferguson.info",
     "authorName": "Alan J. Ferguson",
-    "enableGit": true,
+    "enableGit": false,
     "repositories": null,
     "updatInterval": 5,
     "useDefaultAuthor": true
@@ -44,7 +44,7 @@
     "opengl_antialiasing_mode": 2
   },
   "input": {
-    "auto_pan": false,
+    "auto_pan": true,
     "auto_pan_acceleration": 5,
     "center_on_zoom": true,
     "focus_follow_sch_pcb": true,
@@ -60,7 +60,7 @@
     "scroll_modifier_pan_v": 306,
     "scroll_modifier_zoom": 0,
     "warp_mouse_on_move": true,
-    "zoom_acceleration": false,
+    "zoom_acceleration": true,
     "zoom_speed": 5,
     "zoom_speed_auto": true
   },
