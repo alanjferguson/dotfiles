@@ -9,9 +9,9 @@
     "sort_order": 0
   },
   "appearance": {
-    "color_theme": "_builtin_default",
+    "color_theme": "/Users/ajf/Documents/KiCad/9.0/3rdparty/colors/com_github_pointhi_kicad-color-schemes_solarized-light/solarized-light.json",
     "default_font": "KiCad Font",
-    "edit_label_height": 376,
+    "edit_label_height": 628,
     "edit_label_visible_columns": "0 1 2 3 4 5 6 7",
     "edit_label_width": 936,
     "edit_sheet_height": 447,
@@ -42,15 +42,15 @@
     "design_blocks_panel_docked_width": 300,
     "design_blocks_panel_float_height": -1,
     "design_blocks_panel_float_width": -1,
-    "design_blocks_show": true,
+    "design_blocks_show": false,
     "float_net_nav_panel": false,
     "hierarchy_panel_docked_height": -1,
     "hierarchy_panel_docked_width": 300,
     "hierarchy_panel_float_height": 200,
     "hierarchy_panel_float_width": 200,
     "net_nav_panel_docked_size": {
-      "height": 613,
-      "width": 300
+      "height": 250,
+      "width": 160
     },
     "net_nav_panel_float_pos": {
       "x": 50,
@@ -106,7 +106,7 @@
     "zoom_to_fit": true
   },
   "design_block_chooser": {
-    "height": 2000,
+    "height": 1065,
     "keep_annotations": false,
     "lib_tree": {
       "column_widths": {
@@ -117,7 +117,7 @@
     "place_as_sheet": false,
     "repeated_placement": false,
     "sash_pos_h": 440,
-    "sash_pos_v": 1120,
+    "sash_pos_v": 653,
     "sort_mode": 0,
     "width": 300
   },
@@ -157,11 +157,12 @@
       "Datasheet": 400,
       "Footprint": 100,
       "Reference": 100,
+      "Sheet": 80,
       "Value": 153
     },
     "height": 829,
-    "page": 0,
-    "scope": 0,
+    "page": 1,
+    "scope": 1,
     "selection_mode": 0,
     "width": 1897
   },
@@ -206,7 +207,13 @@
       "Description"
     ],
     "open_libs": [
-      "Connector"
+      "Switch",
+      "Relay",
+      "Analog_Switch",
+      "RF_Switch",
+      "-- Already Placed --",
+      "Jumper",
+      "Interface_USB"
     ]
   },
   "lib_view": {
@@ -489,7 +496,7 @@
       "fast_grid_1": 1,
       "fast_grid_2": 2,
       "last_size": 1,
-      "line_width": 1.0,
+      "line_width": 0.5,
       "min_spacing": 10.0,
       "override_connected": true,
       "override_connected_idx": 1,
@@ -530,13 +537,13 @@
       "user_grid_x": "",
       "user_grid_y": ""
     },
-    "maximized": false,
+    "maximized": true,
     "mru_path": "",
-    "perspective": "layout2|name=MainToolbar;caption=;state=139632;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=1172;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=26;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=SchematicHierarchy;caption=Schematic Hierarchy;state=2099148;dir=4;layer=3;row=0;pos=1;prop=100000;bestw=300;besth=200;minw=120;minh=60;maxw=-1;maxh=-1;floatx=354;floaty=98;floatw=200;floath=200|name=PropertiesManager;caption=Properties;state=2099148;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=300;besth=200;minw=240;minh=60;maxw=-1;maxh=-1;floatx=50;floaty=200;floatw=300;floath=400|name=SelectionFilter;caption=Selection Filter;state=2098636;dir=4;layer=3;row=0;pos=2;prop=0;bestw=180;besth=-1;minw=180;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DesignBlocks;caption=Design Blocks;state=2099148;dir=2;layer=3;row=0;pos=0;prop=100000;bestw=300;besth=200;minw=240;minh=60;maxw=-1;maxh=-1;floatx=50;floaty=200;floatw=800;floath=600|name=NetNavigator;caption=Net Navigator;state=2099150;dir=4;layer=3;row=0;pos=1;prop=100000;bestw=300;besth=200;minw=120;minh=60;maxw=-1;maxh=-1;floatx=50;floaty=200;floatw=200;floath=200|name=OptToolbar;caption=;state=139596;dir=4;layer=2;row=0;pos=0;prop=100000;bestw=34;besth=460;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=2;row=0;pos=0;prop=100000;bestw=34;besth=890;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=400;besth=168;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Search;caption=Search;state=2098686;dir=3;layer=0;row=0;pos=0;prop=100000;bestw=180;besth=100;minw=180;minh=60;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=480;floath=200|dock_size(1,6,0)=34|dock_size(3,6,0)=26|dock_size(4,3,0)=302|dock_size(4,2,0)=34|dock_size(2,2,0)=34|dock_size(5,0,0)=402|dock_size(2,3,0)=302|",
+    "perspective": "layout2|name=MainToolbar;caption=;state=139632;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=1172;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=26;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=SchematicHierarchy;caption=Schematic Hierarchy;state=2099148;dir=4;layer=3;row=0;pos=1;prop=100000;bestw=300;besth=200;minw=120;minh=60;maxw=-1;maxh=-1;floatx=354;floaty=116;floatw=200;floath=200|name=PropertiesManager;caption=Properties;state=2099148;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=300;besth=200;minw=240;minh=60;maxw=-1;maxh=-1;floatx=50;floaty=200;floatw=300;floath=400|name=SelectionFilter;caption=Selection Filter;state=2098636;dir=4;layer=3;row=0;pos=2;prop=0;bestw=180;besth=-1;minw=180;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DesignBlocks;caption=Design Blocks;state=2099150;dir=2;layer=3;row=0;pos=0;prop=100000;bestw=300;besth=200;minw=240;minh=60;maxw=-1;maxh=-1;floatx=50;floaty=200;floatw=800;floath=600|name=NetNavigator;caption=Net Navigator;state=2099150;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=200;besth=200;minw=120;minh=60;maxw=-1;maxh=-1;floatx=50;floaty=200;floatw=200;floath=200|name=OptToolbar;caption=;state=139596;dir=4;layer=2;row=0;pos=0;prop=100000;bestw=34;besth=460;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=2;row=0;pos=0;prop=100000;bestw=34;besth=890;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=400;besth=168;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Search;caption=Search;state=2098686;dir=3;layer=0;row=0;pos=0;prop=100000;bestw=180;besth=100;minw=180;minh=60;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=480;floath=200|dock_size(1,6,0)=34|dock_size(3,6,0)=26|dock_size(4,3,0)=302|dock_size(4,2,0)=34|dock_size(2,2,0)=34|dock_size(5,0,0)=402|",
     "pos_x": 0,
-    "pos_y": 25,
-    "size_x": 2560,
-    "size_y": 2135,
+    "pos_y": 43,
+    "size_x": 1920,
+    "size_y": 1127,
     "zoom_factors": [
       0.05,
       0.07,
