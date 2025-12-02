@@ -118,8 +118,9 @@ unstowit() {
 # Process all apps in the current directory
 process_apps() {
   local func=$1
+  local apps=$2
   
-  for app in */; do
+  for app in $apps; do
     if [ -d "$app" ]; then
       $func "${HOME}" "$(basename "$app")"
     fi
@@ -136,9 +137,6 @@ show_usage() {
 }
 
 # Main script logic
-if [[ $# -gt 1 ]]; then
-  show_usage
-fi
 
 # Check Stow version before proceeding
 check_stow_version
@@ -147,17 +145,19 @@ check_stow_version
 check_repo_ownership
 
 action=${1:-show_usage}
+shift
+apps=${*:-"*/"}
 
 case $action in
   stow)
     print_banner "Stowing dotfiles for user: $(whoami)"
-    process_apps stowit
+    process_apps stowit "$apps"
     print_banner "Stowing complete"
     ;;
     
   unstow)
     print_banner "Unstowing dotfiles for user: $(whoami)"
-    process_apps unstowit
+    process_apps unstowit "$apps"
     print_banner "Unstowing complete"
     ;;
     
