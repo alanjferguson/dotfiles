@@ -1,0 +1,1 @@
+eval -- "$(/home/ajf/.cargo/bin/starship init bash --print-full-init)"
