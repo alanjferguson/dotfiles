@@ -1,7 +1,3 @@
-[user]
-  name = Alan J. Ferguson
-  email = alan@ferguson.info
-  signingkey = ~/.ssh/id_ajf_git_signing.pub
 [gpg]
   format = ssh
 [commit]
