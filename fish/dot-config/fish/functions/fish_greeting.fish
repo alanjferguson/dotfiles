@@ -5,4 +5,8 @@ function fish_greeting
   else
     echo "Welcome to fish, the friendly interactive shell"
   end
+
+  if type -q keychain
+      keychain --eval ~/.ssh/id_ed25519 | source
+  end
 end
