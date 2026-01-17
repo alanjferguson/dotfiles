@@ -1,0 +1,9 @@
+[default]
+baudrate = 115200
+databits = 8
+stopbits = 1
+parity = none
+input-mode = line
+timestamp = true
+socket = unix:/tmp/tio-socket-0
+color = bold
