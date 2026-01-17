@@ -9,3 +9,8 @@ if type -q eza
   abbr -a la eza -lah
   abbr -a tree eza -T
 end
+
+if type -q lazydocker
+  abbr --add --position command lazypodman DOCKER_HOST=unix:///run/user/$(id -u)/podman/podman.sock lazydocker
+end
+

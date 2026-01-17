@@ -1,0 +1,1 @@
+../../../../../repos/fetch.fish/functions/fetch.fish
