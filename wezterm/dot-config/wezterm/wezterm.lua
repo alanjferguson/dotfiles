@@ -37,7 +37,7 @@ end
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
 if wezterm.gui then
-  config.color_scheme = wezterm.gui.get_appearance() == "Dark" and "Modus-Vivendi" or "Modus-Operandi"
+  config.color_scheme = wezterm.gui.get_appearance() == "Dark" and "Modus-Vivendi-Tinted" or "Modus-Operandi-Tinted"
 end
 
 -- Font setup
