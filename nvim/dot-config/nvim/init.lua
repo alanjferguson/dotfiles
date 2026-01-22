@@ -47,10 +47,6 @@ vim.opt.splitright = true
 --------------------------------------------------------------------------------
 -- dependencies
 --------------------------------------------------------------------------------
----
-local deps = {
-  { source = "https://github.com/Makaze/AnsiEsc" },
-}
 
 -- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
 local path_package = vim.fn.stdpath("data") .. "/site/"
@@ -70,7 +66,8 @@ if not vim.loop.fs_stat(mini_path) then
 end
 
 -- Set up 'mini.deps' (customize to your liking)
-require("mini.deps").setup({ path = { package = path_package } })
+local MiniDeps = require("mini.deps")
+MiniDeps.setup({ path = { package = path_package } })
 
 local add = MiniDeps.add
 local now = MiniDeps.now
@@ -89,6 +86,8 @@ local function vmap(lhs, rhs, desc)
 end
 
 -- now(function() require("mini.basics").setup({extra_ui=true}) end)
+
+add("https://github.com/Makaze/AnsiEsc")
 
 --------------------------------------------------------------------------------
 -- colorscheme
@@ -175,19 +174,32 @@ end)
 --------------------------------------------------------------------------------
 
 add({
-  source = "https://github.com/mason-org/mason-lspconfig.nvim",
-  depends = {
-    { source = "mason-org/mason.nvim" },
-  },
+  source = "https://github.com/neovim/nvim-lspconfig",
 })
 
-require("mason").setup({})
-require("mason-lspconfig").setup({
-  ensure_installed = {
-    "clangd",
-    "lua-ls",
-  },
+add({
+  source = "https://github.com/mrcjkb/rustaceanvim",
 })
+
+later(function()
+  vim.lsp.enable("lua_ls")
+  vim.lsp.enable("clangd")
+end)
+
+--------------------------------------------------------------------------------
+-- DIAGNOSTICS
+--------------------------------------------------------------------------------
+
+add({
+  source = "https://github.com/rachartier/tiny-inline-diagnostic.nvim",
+})
+
+later(function()
+  require("tiny-inline-diagnostic").setup()
+  vim.diagnostic.config({
+    virtual_text = false,
+  })
+end)
 
 --------------------------------------------------------------------------------
 -- Mini things
@@ -195,24 +207,25 @@ require("mason-lspconfig").setup({
 
 now(function()
   require("mini.icons").setup()
+  require("mini.statusline").setup()
+  require("mini.starter").setup()
+end)
+
+now(function()
   require("mini.completion").setup()
   require("mini.trailspace").setup()
   require("mini.indentscope").setup()
   require("mini.git").setup()
   require("mini.diff").setup()
-  require("mini.statusline").setup()
-  require("mini.starter").setup()
-  require("mini.extra").setup()
-  require("mini.files").setup()
-  require("mini.pick").setup()
 
-  -- Add config
+  local MiniFiles = require("mini.files")
+  MiniFiles.setup()
   nmap("<leader>fe", function()
     MiniFiles.open()
   end, "Open File Explorer")
-  nmap("<leader>fE", function()
-    MiniExtra.pickers.explorer()
-  end, "Open File Explorer")
+
+  local MiniPick = require("mini.pick")
+  MiniPick.setup()
   nmap("<leader>:", function()
     MiniPick.command_history()
   end, "Command History")
@@ -228,62 +241,68 @@ now(function()
   nmap("<leader>ff", function()
     MiniPick.builtin.files()
   end, "Find Files")
-  nmap("<leader>sd", function()
-    MiniExtra.pickers.diagnostic()
-  end, "Diagnostics")
   nmap("<leader>sh", function()
     MiniPick.builtin.help()
   end, "Help Pages")
   nmap("<leader>fr", function()
     MiniPick.builtin.resume()
   end, "Resume")
-  --
-  nmap("<leader>fr", function()
-    MiniPick.recent()
-  end, "Recent")
+
+  local MiniExtra = require("mini.extra")
+  MiniExtra.setup()
+  nmap("<leader>fE", function()
+    MiniExtra.pickers.explorer()
+  end, "Open File Explorer")
+  nmap("<leader>sd", function()
+    MiniExtra.pickers.diagnostic()
+  end, "Diagnostics")
+
+  local MiniNotify = require('mini.notify')
+  MiniNotify.setup()
+
   -- search
-  nmap('<leader>s"', function()
-    MiniPick.registers()
-  end, "Registers")
-  nmap("<leader>s/", function()
-    MiniPick.search_history()
-  end, "Search History")
-  nmap("<leader>sa", function()
-    MiniPick.autocmds()
-  end, "Autocmds")
-  nmap("<leader>sc", function()
-    MiniPick.command_history()
-  end, "Command History")
-  nmap("<leader>sC", function()
-    MiniPick.commands()
-  end, "Commands")
-  nmap("<leader>sH", function()
-    MiniPick.highlights()
-  end, "Highlights")
-  nmap("<leader>si", function()
-    MiniPick.icons()
-  end, "Icons")
-  nmap("<leader>sj", function()
-    MiniPick.jumps()
-  end, "Jumps")
-  nmap("<leader>sk", function()
-    MiniPick.keymaps()
-  end, "Keymaps")
-  nmap("<leader>sl", function()
-    MiniPick.loclist()
-  end, "Location List")
-  nmap("<leader>sm", function()
-    MiniPick.marks()
-  end, "Marks")
-  nmap("<leader>sM", function()
-    MiniPick.man()
-  end, "Man Pages")
-  nmap("<leader>sq", function()
-    MiniPick.qflist()
-  end, "Quickfix List")
-  nmap("<leader>su", function()
-    MiniPick.undo()
-  end, "Undo History")
+  -- nmap('<leader>s"', function()
+  --   MiniPick.registers()
+  -- end, "Registers")
+  -- nmap("<leader>s/", function()
+  --   MiniPick.search_history()
+  -- end, "Search History")
+  -- nmap("<leader>sa", function()
+  --   MiniPick.autocmds()
+  -- end, "Autocmds")
+  -- nmap("<leader>sc", function()
+  --   MiniPick.command_history()
+  -- end, "Command History")
+  -- nmap("<leader>sC", function()
+  --   MiniPick.commands()
+  -- end, "Commands")
+  -- nmap("<leader>sH", function()
+  --   MiniPick.highlights()
+  -- end, "Highlights")
+  -- nmap("<leader>si", function()
+  --   MiniPick.icons()
+  -- end, "Icons")
+  -- nmap("<leader>sj", function()
+  --   MiniPick.jumps()
+  -- end, "Jumps")
+  -- nmap("<leader>sk", function()
+  --   MiniPick.keymaps()
+  -- end, "Keymaps")
+  -- nmap("<leader>sl", function()
+  --   MiniPick.loclist()
+  -- end, "Location List")
+  -- nmap("<leader>sm", function()
+  --   MiniPick.marks()
+  -- end, "Marks")
+  -- nmap("<leader>sM", function()
+  --   MiniPick.man()
+  -- end, "Man Pages")
+  -- nmap("<leader>sq", function()
+  --   MiniPick.qflist()
+  -- end, "Quickfix List")
+  -- nmap("<leader>su", function()
+  --   MiniPick.undo()
+  -- end, "Undo History")
 end)
 
 add({ source = "https://github.com/dhananjaylatkar/cscope_maps.nvim" })
@@ -299,7 +318,7 @@ end)
 add({ source = "https://github.com/zk-org/zk-nvim" })
 later(function()
   require("zk").setup({
-    picker = "fzf_lua",
+    picker = "minipick",
     lsp = {
       -- `config` is passed to `vim.lsp.start(config)`
       config = {
@@ -325,6 +344,17 @@ later(function()
     "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>",
     "Search notes"
   )
+end)
+
+add({
+  source = "https://github.com/folke/noice.nvim",
+  depends = {
+    { source = "https://github.com/MunifTanjim/nui.nvim"},
+  },
+})
+
+later(function()
+  require('noice').setup()
 end)
 
 add({
