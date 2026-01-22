@@ -6,5 +6,6 @@ parity = none
 input-mode = line
 timestamp = true
 log = true
+log-directory = /var/log/tio/
 socket = unix:/tmp/tio-socket-0
 color = bold

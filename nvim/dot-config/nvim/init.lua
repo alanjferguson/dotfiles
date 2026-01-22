@@ -28,6 +28,9 @@ vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 10
 vim.opt.wrap = false
 
+-- statuscolumn
+vim.opt.signcolumn = "yes" -- always show so window width doesn't change
+
 --------------------------------------------------------------------------------
 -- search settings
 --------------------------------------------------------------------------------
