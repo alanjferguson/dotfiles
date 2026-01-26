@@ -1,1 +1,0 @@
-../../../../../repos/fetch.fish/conf.d/fetch.fish
