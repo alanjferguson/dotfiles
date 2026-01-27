@@ -123,68 +123,76 @@ end)
 --------------------------------------------------------------------------------
 -- treesitter
 --------------------------------------------------------------------------------
-add({
-  source = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring",
-  depends = {
-    { source = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-    { source = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
-  },
-})
 
-later(function()
-  local ts_parsers = {
-    "c",
-    "lua",
-    "markdown",
-    "python",
-  }
-  local nts = require("nvim-treesitter")
-  nts.install(ts_parsers)
-  -- vim.api.nvim_create_autocmd('PackChanged', {callback = function() nts.update() end })
-  vim.api.nvim_create_autocmd("FileType", { -- enable treesitter highlighting and indents
-    callback = function(args)
-      local filetype = args.match
-      local lang = vim.treesitter.language.get_lang(filetype)
-      if vim.treesitter.language.add(lang) then
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        vim.treesitter.start()
-      end
-    end,
+if vim.fn.has('nvim-0.11.0') == 1 then
+  add({
+    source = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring",
+    depends = {
+      { source = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+      { source = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
+    },
   })
 
-  require("treesitter-context").setup({
-    max_lines = 3,
-    multiline_threshold = 1,
-    min_window_height = 20,
-  })
+  later(function()
+    local ts_parsers = {
+      "c",
+      "lua",
+      "markdown",
+      "python",
+    }
+    local nts = require("nvim-treesitter")
+    nts.install(ts_parsers)
+    -- vim.api.nvim_create_autocmd('PackChanged', {callback = function() nts.update() end })
+    vim.api.nvim_create_autocmd("FileType", { -- enable treesitter highlighting and indents
+      callback = function(args)
+        local filetype = args.match
+        local lang = vim.treesitter.language.get_lang(filetype)
+        if not lang then
+          return
+        end
+        if vim.treesitter.language.add(lang) then
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          vim.treesitter.start()
+        end
+      end,
+    })
 
-  require("ts_context_commentstring").setup({
-    enable_autocmd = false,
-  })
+    require("treesitter-context").setup({
+      max_lines = 3,
+      multiline_threshold = 1,
+      min_window_height = 20,
+    })
 
-  local get_option = vim.filetype.get_option
-  vim.filetype.get_option = function(filetype, option)
-    return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
-      or get_option(filetype, option)
-  end
-end)
+    require("ts_context_commentstring").setup({
+      enable_autocmd = false,
+    })
+
+    local get_option = vim.filetype.get_option
+    vim.filetype.get_option = function(filetype, option)
+      return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
+        or get_option(filetype, option)
+    end
+  end)
+end
 
 --------------------------------------------------------------------------------
 -- LSP
 --------------------------------------------------------------------------------
 
-add({
-  source = "https://github.com/neovim/nvim-lspconfig",
-})
+if vim.fn.has('nvim-0.11.0') == 1 then
+  add({
+    source = "https://github.com/neovim/nvim-lspconfig",
+  })
 
-add({
-  source = "https://github.com/mrcjkb/rustaceanvim",
-})
+  add({
+    source = "https://github.com/mrcjkb/rustaceanvim",
+  })
 
-later(function()
-  vim.lsp.enable("lua_ls")
-  vim.lsp.enable("clangd")
-end)
+  later(function()
+    vim.lsp.enable("lua_ls")
+    vim.lsp.enable("clangd")
+  end)
+end
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS
@@ -319,7 +327,7 @@ add({ source = "https://github.com/zk-org/zk-nvim" })
 later(function()
   require("zk").setup({
     picker = "minipick",
-    lsp = {
+    lsp = vim.fn.has('nvim-0.11.0') == 1 and {
       -- `config` is passed to `vim.lsp.start(config)`
       config = {
         name = "zk",
@@ -328,7 +336,7 @@ later(function()
         -- on_attach = ...
         -- etc, see `:h vim.lsp.start()`
       },
-    },
+    } or {},
     -- automatically attach buffers in a zk notebook that match the given filetypes
     auto_attach = {
       enabled = true,
