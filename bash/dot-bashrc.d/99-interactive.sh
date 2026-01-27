@@ -1,4 +1,6 @@
-if command -v keychain > /dev/null 2>&1; then
+if [ -S "$SSH_AUTH_SOCK" ]; then
+  echo "Have SSH_AUTH_SOCK, skipping keychain"
+elif command -v keychain > /dev/null 2>&1; then
   # Source existing keychain env if available (fast, won't hang)
   [ -f "$HOME/.keychain/$HOSTNAME-sh" ] && source "$HOME/.keychain/$HOSTNAME-sh"
 
