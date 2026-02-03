@@ -27,22 +27,20 @@ end
 # check brew executable exists
 if not test -x $brew_path
   echo "brew not found"
-  exit 1
-end
+else
+  # add brew to path
+  if not $brew_path shellenv | source
+    echo "brew shellenv failed"
+  end
 
-# add brew to path
-if not $brew_path shellenv | source
-  echo "brew shellenv failed"
-  exit 1
-end
+  # set up completions
+  if test -d (brew --prefix)"/share/fish/completions"
+    set -p fish_complete_path (brew --prefix)/share/fish/completions
+  end
 
-# set up compleitions
-if test -d (brew --prefix)"/share/fish/completions"
-  set -p fish_complete_path (brew --prefix)/share/fish/completions
-end
-
-if test -d (brew --prefix)"/share/fish/vendor_completions.d"
-  set -p fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
+  if test -d (brew --prefix)"/share/fish/vendor_completions.d"
+    set -p fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
+  end
 end
 
 # ---------------
