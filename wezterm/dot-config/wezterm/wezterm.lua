@@ -41,7 +41,7 @@ if wezterm.gui then
 end
 
 -- Font setup
-config.font_size = 11.0
+config.font_size = 10.0
 config.font = wezterm.font({
   family = "IosevkaTerm NF",
   weight = "Medium",
