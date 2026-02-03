@@ -350,16 +350,26 @@ later(function()
       enabled = true,
     },
   })
+end)
 
-  nmap("<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", "New note")
-  nmap("<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", "Open notes")
-  nmap("<leader>zt", "<Cmd>ZkTags<CR>", "Open note with tag")
-  map(
-    { "n", "v" },
-    "<leader>zf",
-    "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>",
-    "Search notes"
-  )
+add({ source = "https://github.com/MeanderingProgrammer/render-markdown.nvim" })
+later(function()
+  require('render-markdown').setup()
+end)
+
+nmap("<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", "New note")
+nmap("<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", "Open notes")
+nmap("<leader>zt", "<Cmd>ZkTags<CR>", "Open note with tag")
+map(
+  { "n", "v" },
+  "<leader>zf",
+  "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>",
+  "Search notes"
+)
+
+add({ source = "https://github.com/stevearc/conform.nvim" })
+later(function()
+  require('conform').setup()
 end)
 
 add({
