@@ -354,7 +354,12 @@ end)
 
 add({ source = "https://github.com/MeanderingProgrammer/render-markdown.nvim" })
 later(function()
-  require('render-markdown').setup()
+  require('render-markdown').setup({
+    code = {
+      conceal_delimiters = false,
+      border = 'none',
+    }
+  })
 end)
 
 nmap("<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", "New note")
