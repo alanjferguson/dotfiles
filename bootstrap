@@ -26,18 +26,18 @@ print_warning() {
 check_stow_version() {
     local required_version="2.3.0"
     local stow_version
-    
+
     stow_version=$(stow --version 2>/dev/null | head -n1 | sed -E 's/.*([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
-    
+
     if [ -z "$stow_version" ]; then
         print_warning "Could not determine Stow version. Please ensure you have Stow $required_version or later installed."
         exit 1
     fi
-    
+
     # Compare versions using a portable bash-only method using arrays
     local IFS=.
     local i required=($required_version) current=($stow_version) # split into array
-    
+
     for ((i=0; i<3; i++)); do
         if [[ -z "${current[i]}" ]]; then
             current[i]=0
@@ -73,7 +73,7 @@ get_script_dir() {
 check_repo_ownership() {
     local script_dir="$(get_script_dir)"
     local repo_owner
-    
+
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # macOS
         repo_owner="$(stat -f '%Su' "$script_dir")"
@@ -81,7 +81,7 @@ check_repo_ownership() {
         # Linux
         repo_owner="$(stat -c '%U' "$script_dir")"
     fi
-    
+
     if [ "$repo_owner" != "$(whoami)" ]; then
         print_warning "This dotfiles repository (at $script_dir) is owned by '$repo_owner'"
         print_warning "Please clone the repository into your own home directory and run this script from there"
@@ -91,49 +91,67 @@ check_repo_ownership() {
 
 # Run the stow command for the passed in directory ($2) in location $1
 stowit() {
-  usr=$1
-  app=$2
-  echo -e "${BOLD}${YELLOW}Stowing ${app}${NC}"
-  # -v verbose
-  # --adopt so we can pull in existing changes
-  # --dotfiles convert dot-foo to .foo
-  # -t target
-  stow -v --adopt --dotfiles -t "${usr}" "${app}"
-  echo ""
+    usr=$1
+    app=$2
+    echo -e "${BOLD}${YELLOW}Stowing ${app}${NC}"
+    # -v verbose
+    # --adopt so we can pull in existing changes
+    # --dotfiles convert dot-foo to .foo
+    # -t target
+    stow -v --adopt --dotfiles -t "${usr}" "${app}"
+    echo ""
 }
 
 # Run the unstow command for the passed in directory ($2) in location $1
 unstowit() {
-  usr=$1
-  app=$2
-  echo -e "${BOLD}${YELLOW}Unstowing ${app}${NC}"
-  # -v verbose
-  # --dotfiles convert dot-foo to .foo
-  # -D delete
-  # -t target
-  stow -v --dotfiles -D -t "${usr}" "${app}"
-  echo ""
+    usr=$1
+    app=$2
+    echo -e "${BOLD}${YELLOW}Unstowing ${app}${NC}"
+    # -v verbose
+    # --dotfiles convert dot-foo to .foo
+    # -D delete
+    # -t target
+    stow -v --dotfiles -D -t "${usr}" "${app}"
+    echo ""
 }
 
 # Process all apps in the current directory
 process_apps() {
-  local func=$1
-  local apps=$2
-  
-  for app in $apps; do
-    if [ -d "$app" ]; then
-      $func "${HOME}" "$(basename "$app")"
-    fi
-  done
+    local func=$1
+    local apps=$2
+
+    for app in $apps; do
+        if [ -d "$app" ]; then
+            $func "${HOME}" "$(basename "$app")"
+        fi
+    done
+}
+
+# Ensure that common dirs exist so we don't symlink too high up the chain
+process_needed_dirs() {
+    print_banner "Ensuring directories exist:"
+
+    local dirs=("$HOME/.config/" "$HOME/.local/" "$HOME/.ssh/")
+
+    for dir in ${dirs[@]}; do
+        echo -n "$dir: "
+
+        if [ ! -d "$dir" ]; then
+            echo -e "${YELLOW}MAKING${NC}"
+            mkdir "$dir"
+        else
+            echo -e "${GREEN}EXISTS${NC}"
+        fi
+    done
 }
 
 # Show usage information
 show_usage() {
-  echo "Usage: $0 [stow|unstow]"
-  echo "  help   - Show this help message (default)"
-  echo "  stow   - Create symlinks for all configurations"
-  echo "  unstow - Remove symlinks for all configurations"
-  exit 1
+    echo "Usage: $0 [stow|unstow]"
+    echo "  help   - Show this help message (default)"
+    echo "  stow   - Create symlinks for all configurations"
+    echo "  unstow - Remove symlinks for all configurations"
+    exit 1
 }
 
 # Main script logic
@@ -149,19 +167,22 @@ shift
 apps=${*:-"*/"}
 
 case $action in
-  stow)
-    print_banner "Stowing dotfiles for user: $(whoami)"
-    process_apps stowit "$apps"
-    print_banner "Stowing complete"
-    ;;
-    
-  unstow)
-    print_banner "Unstowing dotfiles for user: $(whoami)"
-    process_apps unstowit "$apps"
-    print_banner "Unstowing complete"
-    ;;
-    
-  *)
-    show_usage
-    ;;
+    stow)
+        process_needed_dirs
+        print_banner "Stowing dotfiles for user: $(whoami)"
+        process_apps stowit "$apps"
+        print_banner "Stowing complete"
+        ;;
+
+    unstow)
+        print_banner "Unstowing dotfiles for user: $(whoami)"
+        process_apps unstowit "$apps"
+        print_banner "Unstowing complete"
+        ;;
+
+    *)
+        show_usage
+        ;;
 esac
+
+# vim: ts=4
