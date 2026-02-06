@@ -147,7 +147,6 @@ config.default_cursor_style = "SteadyBlock"
 config.cursor_thickness = "0.1cell"
 config.force_reverse_video_cursor = true
 
-config.default_domain = 'WSL:Ubuntu'
 
 config.keys = {
   -- Disable fullscreen mode keybindings
