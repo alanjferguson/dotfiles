@@ -1,0 +1,43 @@
+#!/bin/env bash
+
+# Store worktree information before pruning
+echo "Collecting worktree information..."
+
+# Get worktree info in porcelain format for reliable parsing
+worktrees_info=$(git worktree list --porcelain)
+
+# Parse and store path-branch pairs (excluding the main worktree)
+declare -A worktree_map
+
+while IFS= read -r line; do
+    if [[ $line == worktree\ * ]]; then
+        path="${line#worktree }"
+    elif [[ $line == branch\ * ]]; then
+        branch="${line#branch refs/heads/}"
+        # Only store non-main worktrees (ones that have a separate path)
+        if [[ -n "$path" ]] && [[ ! -d "$path" ]]; then
+            worktree_map["$path"]="$branch"
+            echo "Found deleted worktree: $path -> $branch"
+        fi
+        path=""
+    fi
+done <<< "$worktrees_info"
+
+# Prune stale worktrees
+echo ""
+echo "Pruning stale worktrees..."
+git worktree prune -v
+
+# Recreate worktrees
+echo ""
+echo "Recreating worktrees..."
+
+for path in "${!worktree_map[@]}"; do
+    branch="${worktree_map[$path]}"
+    echo "Recreating: $path (branch: $branch)"
+    git worktree add "$path" "$branch"
+done
+
+echo ""
+echo "Done! Current worktrees:"
+git worktree list
