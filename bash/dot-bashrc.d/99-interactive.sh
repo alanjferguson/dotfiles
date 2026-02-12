@@ -1,6 +1,3 @@
-# Only run in interactive shells
-[[ $- != *i* ]] && return
-
 if [ -S "$SSH_AUTH_SOCK" ]; then
   echo "Have SSH_AUTH_SOCK, skipping keychain"
 elif command -v keychain > /dev/null 2>&1; then
