@@ -1,0 +1,13 @@
+#!/bin/env bash
+
+# Set monitor brightness using ddcutil
+
+STEP=10
+
+case "$1" in
+    up) ddcutil setvcp 10 + $STEP 2>/dev/null ;;
+    down) ddcutil setvcp 10 - $STEP 2>/dev/null ;;
+    get) ddcutil getvcp 10 2>/dev/null ;;
+    set) ddcutil setvcp 10 $2 2>/dev/null ;;
+    *) echo "Usage: $0 {up|down|get|set <val>}" >&2 ;;
+esac
