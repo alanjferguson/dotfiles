@@ -5,12 +5,20 @@ Include config.d/*.conf
 Host *
   # Connection multiplexing settings
   ControlMaster auto
-  ControlPersist 4h
+  ControlPersist no
   ControlPath ~/.ssh/cm-%r@%h:%p
 
-  # Keep alive settings
+  # Keep alive settings — use SSH-level keepalives only, not TCP-level,
+  # so brief network blips (e.g. VPN reconnect) don't kill the connection
   ServerAliveInterval 30
-  ServerAliveCountMax 20
+  ServerAliveCountMax 3
+  TCPKeepAlive no
+
+  # Avoid long hangs when a host is unreachable after a network change
+  ConnectTimeout 10
+
+  # Auto-add keys to agent on first use
+  AddKeysToAgent yes
 
   # Security settings
   HashKnownHosts yes
