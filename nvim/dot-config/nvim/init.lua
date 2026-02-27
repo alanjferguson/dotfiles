@@ -45,14 +45,6 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 --------------------------------------------------------------------------------
--- clipboard
---------------------------------------------------------------------------------
-
-if vim.fn.has('wsl') == 1 then
-  vim.g.clipboard = "win32yank"
-end
-
---------------------------------------------------------------------------------
 -- dependencies
 --------------------------------------------------------------------------------
 
@@ -103,9 +95,6 @@ add("https://github.com/Makaze/AnsiEsc")
 
 add({
   source = "https://github.com/miikanissi/modus-themes.nvim",
-  depends = {
-    { source = "https://github.com/f-person/auto-dark-mode.nvim" },
-  },
 })
 
 now(function()
@@ -115,16 +104,12 @@ now(function()
     dim_inactive = false,
   })
 
-  require("auto-dark-mode").setup({
-    update_interval = 1000,
-    set_dark_mode = function()
-      vim.api.nvim_set_option_value("background", "dark", {})
+  vim.api.nvim_create_autocmd("OptionSet", {
+    pattern = "background",
+    desc = "Auto switch colorscheme on background change",
+    callback = function()
       vim.cmd([[ colorscheme modus ]])
-    end,
-    set_light_mode = function()
-      vim.api.nvim_set_option_value("background", "light", {})
-      vim.cmd([[ colorscheme modus ]])
-    end,
+    end
   })
 end)
 
@@ -231,14 +216,39 @@ now(function()
   require("mini.completion").setup()
   require("mini.trailspace").setup()
   require("mini.indentscope").setup()
-  require("mini.git").setup()
   require("mini.diff").setup()
+  
+  local MiniGit = require("mini.git")
+  MiniGit.setup()
+
+  local align_blame = function(au_data)
+    if au_data.data.git_subcommand ~= 'blame' then return end
+
+    -- Align blame output with source
+    local win_src = au_data.data.win_source
+    vim.wo.wrap = false
+    vim.fn.winrestview({ topline = vim.fn.line('w0', win_src) })
+    vim.api.nvim_win_set_cursor(0, { vim.fn.line('.', win_src), 0 })
+
+    -- Bind both windows so that they scroll together
+    vim.wo[win_src].scrollbind, vim.wo.scrollbind = true, true
+  end
+
+  local au_opts = { pattern = 'MiniGitCommandSplit', callback = align_blame }
+  vim.api.nvim_create_autocmd('User', au_opts)
+
+  nmap("<leader>gb", function() MiniGit.show_range_history() end, "Blame line")
+  nmap("<leader>gB", "<Cmd>Git blame -- %<CR>", "Blame file")
+  nmap("<leader>gs", function() MiniGit.show_at_cursor() end, "Show at cursor")
 
   local MiniFiles = require("mini.files")
   MiniFiles.setup()
   nmap("<leader>fe", function()
     MiniFiles.open()
   end, "Open File Explorer")
+  nmap("<leader>fE", function()
+    MiniFiles.open(vim.api.nvim_buf_get_name(0))
+  end, "Open File Explorer Here")
 
   local MiniPick = require("mini.pick")
   MiniPick.setup()
@@ -266,9 +276,6 @@ now(function()
 
   local MiniExtra = require("mini.extra")
   MiniExtra.setup()
-  nmap("<leader>fE", function()
-    MiniExtra.pickers.explorer()
-  end, "Open File Explorer")
   nmap("<leader>sd", function()
     MiniExtra.pickers.diagnostic()
   end, "Diagnostics")
