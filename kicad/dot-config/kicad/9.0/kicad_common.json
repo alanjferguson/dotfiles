@@ -6,6 +6,7 @@
   "appearance": {
     "grid_striping": false,
     "hicontrast_dimming_factor": 0.8,
+    "icon_theme": 2,
     "show_scrollbars": false,
     "text_editor_zoom": 0,
     "toolbar_icon_size": 24,
@@ -91,6 +92,6 @@
     "pdf_viewer_name": "",
     "text_editor": "/usr/bin/open -e",
     "use_system_pdf_viewer": true,
-    "working_dir": "/Users/ajf/Nextcloud/Documents/0-RESEARCH/Hardware/20251101_JA40GA_Interface"
+    "working_dir": "/home/ajf/testing/ajf_integration_test"
   }
 }
