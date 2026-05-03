@@ -1,0 +1,3 @@
+[submodule ".assets/modus-themes.nvim"]
+	path = .assets/modus-themes.nvim
+	url = https://github.com/miikanissi/modus-themes.nvim.git
