@@ -25,9 +25,7 @@ case Linux
 end
 
 # check brew executable exists
-if not test -x $brew_path
-  echo "brew not found"
-else
+if test -x $brew_path
   # add brew to path
   if not $brew_path shellenv | source
     echo "brew shellenv failed"
@@ -63,3 +61,11 @@ end
 # ----------
 
 fish_add_path --global "$HOME/.local/bin/"
+
+# -----
+# MISE
+# -----
+if type -q mise
+    mise activate fish | source
+    mise completion fish | source
+end
