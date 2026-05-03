@@ -1,3 +1,8 @@
+[user]
+# Allows me to configure email per repo instead of globally
+  name = Alan Ferguson
+  useConfigOnly = true
+
 [init]
   defaultBranch = main
 [color]
@@ -13,9 +18,14 @@
 [rebase]
   autosquash = true
   updateRefs = true
-[alias]
-  commit-reuse = ! git commit -eF $(git rev-parse --git-dir)/COMMIT_EDITMSG
-[url "ssh://git@github.com/"]
-  pushInsteadof = https://github.com/
-[url "ssh://git@gitlab.com/"]
-  pushInsteadof = https://gitlab.com/
+
+# Force SSH for everything, might be too blunt an intrument
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+
+[url "git@gitlab.com:"]
+  insteadOf = https://gitlab.com/
+
+# Show three-way merge by default (i.e. mine, older, yours)
+[merge]
+  conflictStyle = zdiff3
