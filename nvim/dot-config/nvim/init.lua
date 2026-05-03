@@ -15,12 +15,20 @@ vim.g.maplocalleader = " "
 -- file reading/writing
 --------------------------------------------------------------------------------
 vim.opt.swapfile = false -- disable swap file because they get annoying!
-vim.opt.autoread = true -- auto reload with changes - useful for e.g. Claude
 vim.opt.undofile = true -- use this instead of swap files
+
+vim.opt.autoread = true -- auto reload with changes - useful for e.g. Claude
+-- Need to tell neovim to look for modifications to files/buffers
+vim.api.nvim_create_autocmd({"FocusGained",  "BufEnter"}, {
+  command = "checktime"
+})
 
 --------------------------------------------------------------------------------
 -- appearance stuff
 --------------------------------------------------------------------------------
+
+-- mouse
+vim.opt.mouse = 'a' -- enable mouse everywhere
 
 -- cursor
 vim.opt.cursorline = true
@@ -30,19 +38,44 @@ vim.opt.wrap = false
 
 -- statuscolumn
 vim.opt.signcolumn = "yes" -- always show so window width doesn't change
+vim.opt.fillchars = 'eob: ' -- don't show ~ outside of buffer
 
---------------------------------------------------------------------------------
--- search settings
---------------------------------------------------------------------------------
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.incsearch = true
+-- Editing
+vim.opt.ignorecase  = true -- Ignore case when searching (use `\C` to force not doing that)
+vim.opt.incsearch   = true -- Show search results while typing
+vim.opt.infercase   = true -- Infer letter cases for a richer built-in keyword completion
+vim.opt.smartcase   = true -- Don't ignore case when searching if pattern has upper case
+vim.opt.smartindent = true -- Make indenting smart
 
---------------------------------------------------------------------------------
+vim.opt.completeopt   = 'menuone,noselect' -- Customize completions
+vim.opt.virtualedit   = 'block'            -- Allow going past the end of line in visual block mode
+vim.opt.formatoptions = 'qjl1'             -- Don't autoformat comments
+
 -- splits and tabs
---------------------------------------------------------------------------------
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.splitkeep = 'screen' -- reduces window scrolling during split
+
+-- show genuinely useful whitespace all the time
+vim.opt.listchars = 'tab:⟩·,extends:…,precedes:…,nbsp:␣' -- Define which helper symbols to show
+vim.opt.list      = true                                 -- Show some helper symbols
+
+
+--------------------------------------------------------------------------------
+-- large files
+--------------------------------------------------------------------------------
+vim.api.nvim_create_autocmd("BufReadPre", {
+  callback = function()
+    local size = vim.fn.getfsize(vim.fn.expand("<afile>"))
+    if size > 1024 * 1024 then -- > 1MB
+      vim.bo.syntax = "off"
+      vim.bo.swapfile = false
+      vim.bo.undofile = false
+      vim.opt_local.foldmethod = "manual"
+      vim.b.large_file = true
+    end
+  end,
+})
 
 --------------------------------------------------------------------------------
 -- dependencies
@@ -84,8 +117,6 @@ end
 local function vmap(lhs, rhs, desc)
   map("v", lhs, rhs, desc)
 end
-
--- now(function() require("mini.basics").setup({extra_ui=true}) end)
 
 add("https://github.com/Makaze/AnsiEsc")
 
@@ -217,7 +248,7 @@ now(function()
   require("mini.trailspace").setup()
   require("mini.indentscope").setup()
   require("mini.diff").setup()
-  
+
   local MiniGit = require("mini.git")
   MiniGit.setup()
 
@@ -394,26 +425,6 @@ add({
 later(function()
   require('noice').setup()
 end)
-
-add({
-  source = "https://github.com/coder/claudecode.nvim",
-  depends = {
-    { source = "https://github.com/folke/snacks.nvim" },
-  },
-})
-later(function()
-  require("claudecode").setup()
-end)
-nmap("<leader>ac", "<cmd>ClaudeCode<cr>", "Toggle Claude")
-nmap("<leader>af", "<cmd>ClaudeCodeFocus<cr>", "Focus Claude")
-nmap("<leader>ar", "<cmd>ClaudeCode --resume<cr>", "Resume Claude")
-nmap("<leader>aC", "<cmd>ClaudeCode --continue<cr>", "Continue Claude")
-nmap("<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", "Select Claude model")
-nmap("<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", "Add current buffer")
-vmap("<leader>as", "<cmd>ClaudeCodeSend<cr>", "Send to Claude")
--- Diff management
-nmap("<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", "Accept diff")
-nmap("<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", "Deny diff")
 
 now(function()
   local miniclue = require("mini.clue")
