@@ -426,6 +426,16 @@ later(function()
   require('noice').setup()
 end)
 
+add({ source = "https://github.com/coder/claudecode.nvim" })
+later(function()
+  require('claudecode').setup({
+    diff_opts = {
+      open_in_new_tab=true,
+    }
+  })
+end)
+
+
 now(function()
   local miniclue = require("mini.clue")
   miniclue.setup({
