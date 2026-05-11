@@ -1,0 +1,16 @@
+workspace 1 output eDP-1
+workspace 1
+exec flatpak run eu.betterbird.Betterbird
+for_window [app_id="eu.betterbird.Betterbird"] move container to workspace number 1
+
+workspace 2 output eDP-1
+workspace 2
+for_window [app_id="com.github.IsmaelMartinex.teams_for_linux"] move container to workspace number 2
+
+workspace 10 output eDP-1
+workspace 10
+for_window [app_id="Cider"] move container to workspace number 10
+for_window [app_id="org.pulseaudio.pavucontrol"] move container to 10
+for_window [app_id="blueman-manager"] move container to workspace number 10
+
+# vim: filetype=swayconfig
