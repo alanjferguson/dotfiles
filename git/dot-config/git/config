@@ -13,6 +13,7 @@
   ui = true
 [push]
   recurseSubmodules = check
+  autoSetupRemote = true
 [pull]
   rebase = false
 [rebase]
